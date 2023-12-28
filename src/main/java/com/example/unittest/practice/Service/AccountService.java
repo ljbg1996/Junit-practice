@@ -32,5 +32,10 @@ public class AccountService {
 
         accountRepository.save(account);
     }
+    @Transactional
+    public Account createAccount(String accountNumber, BigDecimal initialBalance) {
+        Account newAccount = new Account(accountNumber, initialBalance);
+        return accountRepository.save(newAccount);
+    }
 
 }

@@ -20,4 +20,8 @@ public class Account {
     @Setter
     private BigDecimal balance;
 
+    public Account(String accountNumber, BigDecimal balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
 }
