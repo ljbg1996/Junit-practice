@@ -24,4 +24,8 @@ public class Account {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
+
+    public Account() {
+
+    }
 }

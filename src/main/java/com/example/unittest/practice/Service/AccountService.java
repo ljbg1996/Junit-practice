@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -14,14 +15,14 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     @Transactional
-    public void deposit(Long accountId, BigDecimal amount) {
+    public Account deposit(Long accountId, BigDecimal amount) {
         Account account = accountRepository.findById(accountId).orElseThrow();
         account.setBalance(account.getBalance().add(amount));
-        accountRepository.save(account);
+        return accountRepository.save(account);
     }
 
     @Transactional
-    public void withdraw(Long accountId, BigDecimal amount) {
+    public Account withdraw(Long accountId, BigDecimal amount) {
         Account account = accountRepository.findById(accountId).orElseThrow();
         int gaps = account.getBalance().compareTo(amount);
         if(gaps < 0){
@@ -29,13 +30,17 @@ public class AccountService {
         }else {
             account.setBalance(account.getBalance().subtract(amount));
         }
-
-        accountRepository.save(account);
+        return accountRepository.save(account);
     }
     @Transactional
     public Account createAccount(String accountNumber, BigDecimal initialBalance) {
         Account newAccount = new Account(accountNumber, initialBalance);
         return accountRepository.save(newAccount);
+    }
+
+    @Transactional
+    public List<Account> getAllAccount() {
+        return accountRepository.findAll();
     }
 
 }
