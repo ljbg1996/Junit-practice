@@ -1,7 +1,7 @@
-package com.example.unittest.practice.Service;
+package UnitTest.Service;
 
-import com.example.unittest.practice.Entity.Account;
-import com.example.unittest.practice.Repository.AccountRepository;
+import UnitTest.Entity.Account;
+import UnitTest.Repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +46,10 @@ public class AccountService {
     @Transactional
     public void deleteAccount(Long accountId){
         accountRepository.deleteById(accountId);
+    }
+
+    @Transactional
+    public List<String> getRichAccount(BigDecimal balance){
+       return accountRepository.findAccountsHavingBalanceGreaterThan(balance);
     }
 }

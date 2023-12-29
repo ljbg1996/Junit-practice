@@ -1,7 +1,7 @@
-package com.example.unittest.practice.Controller;
+package UnitTest.Controller;
 
-import com.example.unittest.practice.Entity.Account;
-import com.example.unittest.practice.Service.AccountService;
+import UnitTest.Entity.Account;
+import UnitTest.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +36,14 @@ public class AccountController {
         return accountService.getAllAccount();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAccount(@PathVariable Long id) {
-        accountService.deleteAccount(id);
+    @PostMapping("/richAccounts")
+    public List<String> getRichAccount(@RequestParam BigDecimal conditionBalance) {
+        return accountService.getRichAccount(conditionBalance);
+    }
+
+    @DeleteMapping("/{accountId}")
+    public ResponseEntity<String> deleteAccount(@PathVariable Long accountId) {
+        accountService.deleteAccount(accountId);
         return ResponseEntity.ok("Account deleted successfully");
     }
 }

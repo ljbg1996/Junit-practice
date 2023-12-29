@@ -1,9 +1,7 @@
-package com.example.unittest.practice.Entity;
+package UnitTest.Entity;
 
 import lombok.Data;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -16,16 +14,14 @@ public class Account {
 
     private String accountNumber;
 
-    @Getter
-    @Setter
     private BigDecimal balance;
 
+    
     public Account(String accountNumber, BigDecimal balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
     public Account() {
-
     }
 }
