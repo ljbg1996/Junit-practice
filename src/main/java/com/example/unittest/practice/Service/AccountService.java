@@ -43,4 +43,8 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    @Transactional
+    public void deleteAccount(Long accountId){
+        accountRepository.deleteById(accountId);
+    }
 }
