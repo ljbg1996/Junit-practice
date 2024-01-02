@@ -25,5 +25,32 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image using the Dockerfile
+                    // The JAR_FILE environment variable is used to indicate the artifact to be added to the Docker image
+                    docker.build(env.IMAGE, "--build-arg JAR_FILE=target/${env.JAR_FILE} .")
+                }
+            }
+        }
+        stage('Deploy to Docker') {
+            steps {
+                script {
+                    // Stop and remove any previous container with the same name
+                    sh "docker stop ${env.CONTAINER_NAME} || true"
+                    sh "docker rm ${env.CONTAINER_NAME} || true"
+
+                    // Run a new container from the built image
+                    sh "docker run -d --name ${env.CONTAINER_NAME} -p 8080:8080 ${env.IMAGE}"
+                }
+            }
+        }
+    }
+    post {
+        always {
+            // Perform cleanup steps if necessary
+            sh '''docker rmi $(docker images -f 'dangling=true' -q) || true'''
+        }
     }
 }
