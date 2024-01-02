@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven "Maven3"
+         maven "maven3.9.6"
     }
 
     stages {
@@ -19,12 +19,6 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvnw test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                // 部署到您的服务器或容器环境，这里需要您自定义脚本
-                // 比如：sh 'deploy-script.sh'
             }
         }
     }
