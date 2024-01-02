@@ -16,12 +16,10 @@ public class Account {
 
     private BigDecimal balance;
 
-
     public Account(String accountNumber, BigDecimal balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
-
     public Account() {
     }
 }
