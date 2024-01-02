@@ -25,8 +25,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // 构建 Docker 镜像
-                    sh "docker build -t ${env.DOCKER_IMAGE} ."
+                    docker.build("myapp:latest")
                 }
             }
         }
