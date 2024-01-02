@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'maven3.9.6'
-        docker 'docker'
+        docker 'docker' // 使用Docker工具的名称
     }
 
     environment {
